@@ -7,12 +7,11 @@ export const LOW = "3. low";
 export const CLOSE = "4. close";
 export const VOLUME = "5. volume";
 
-
 const DateTime = () => {
   const data = useContext(ApiContext);
-  const b = Object.entries(data);
+  const timeDateData = Object.entries(data);
   const show = 10;
-  const [next, setNext] = useState(show);
+  const [next, setNext] = useState(10);
   const handleChange = () => {
     setNext(next + show);
   };
@@ -34,24 +33,21 @@ const DateTime = () => {
             </tr>
           </thead>
           <tbody>
-            {b.slice(0, next).map((d, index) => {
-              console.log("ddddd", d);
-              return (
-                <tr key={d[0]}>
-                  <td>{index + 1}</td>
-                  <td>{d[0]}</td>
-                  <td>{d[1][OPEN]}</td>
-                  <td>{d[1][HIGH]}</td>
-                  <td>{d[1][LOW]}</td>
-                  <td>{d[1][CLOSE]}</td>
-                  <td>{d[1][VOLUME]}</td>
-                </tr>
-              );
-            })}
+            {timeDateData.slice(0, next).map((d, index) => (
+              <tr key={d[0]}>
+                <td>{index + 1}</td>
+                <td>{d[0]}</td>
+                <td>{d[1][OPEN]}</td>
+                <td>{d[1][HIGH]}</td>
+                <td>{d[1][LOW]}</td>
+                <td>{d[1][CLOSE]}</td>
+                <td>{d[1][VOLUME]}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       )}
-      {next < b.length && (
+      {next < timeDateData.length && (
         <button onClick={handleChange} className="button-63">
           Load More
         </button>
